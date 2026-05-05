@@ -1,0 +1,12 @@
+{
+"type": "FeatureCollection",
+"name": "Teatros",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "CGM": "Lomas", "NOMBRE": "Teatro Escuela Horizonte", "TIPO": "TEATROS", "Fecha Vencimiento Reconocimiento": "2026-12-21T00:00:00", "LATITUD": -34.76520539, "LONGITUD": -58.40379143 }, "geometry": { "type": "Point", "coordinates": [ -58.40379143, -34.76520539 ] } },
+{ "type": "Feature", "properties": { "CGM": "Llavallol", "NOMBRE": "Vecinos Del Teatro Cosmopolita Recuperado", "TIPO": "TEATROS", "Fecha Vencimiento Reconocimiento": "2026-12-21T00:00:00", "LATITUD": -34.79578505, "LONGITUD": -58.43234303 }, "geometry": { "type": "Point", "coordinates": [ -58.43234303, -34.79578505 ] } },
+{ "type": "Feature", "properties": { "CGM": "Temperley", "NOMBRE": "Otro Mundo", "TIPO": "TEATROS", "Fecha Vencimiento Reconocimiento": "2026-12-21T00:00:00", "LATITUD": -34.778206, "LONGITUD": -58.391312 }, "geometry": { "type": "Point", "coordinates": [ -58.391312, -34.778206 ] } },
+{ "type": "Feature", "properties": { "CGM": "Temperley", "NOMBRE": "Asociacion Teatro De Las Nobles Bestias", "TIPO": "TEATROS", "Fecha Vencimiento Reconocimiento": "2026-12-21T00:00:00", "LATITUD": -34.773926, "LONGITUD": -58.392982 }, "geometry": { "type": "Point", "coordinates": [ -58.392982, -34.773926 ] } },
+{ "type": "Feature", "properties": { "CGM": "Lomas", "NOMBRE": "Asociacion Teatro Independiente Juvenilia", "TIPO": "TEATROS", "Fecha Vencimiento Reconocimiento": "2026-12-21T00:00:00", "LATITUD": -34.759004, "LONGITUD": -58.419454 }, "geometry": { "type": "Point", "coordinates": [ -58.419454, -34.759004 ] } }
+]
+}

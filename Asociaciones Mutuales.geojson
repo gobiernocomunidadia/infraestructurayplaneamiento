@@ -1,0 +1,15 @@
+{
+"type": "FeatureCollection",
+"name": "Asociaciones Mutuales",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "CGM": "Lomas", "NOMBRE": "Asociacion Mutual De Ex Combatientes A.M.E.Co.", "TIPO": "ASOCIACIONES MUTUALES", "Fecha Vencimiento Reconocimiento": "2026-12-21T00:00:00", "LATITUD": -34.76172349, "LONGITUD": -58.39441846 }, "geometry": { "type": "Point", "coordinates": [ -58.39441846, -34.76172349 ] } },
+{ "type": "Feature", "properties": { "CGM": "Llavallol", "NOMBRE": "Asociacion Mutual Del Personal Del Expreso Lomas A.M.P.E.L", "TIPO": "ASOCIACIONES MUTUALES", "Fecha Vencimiento Reconocimiento": "2026-12-21T00:00:00", "LATITUD": -34.79530713, "LONGITUD": -58.42016499 }, "geometry": { "type": "Point", "coordinates": [ -58.42016499, -34.79530713 ] } },
+{ "type": "Feature", "properties": { "CGM": "Llavallol", "NOMBRE": "Asociacion Mutual 31 De Agosto Del Personal De Vidrieria Argentina", "TIPO": "ASOCIACIONES MUTUALES", "Fecha Vencimiento Reconocimiento": "2026-12-21T00:00:00", "LATITUD": -34.798051, "LONGITUD": -58.424222 }, "geometry": { "type": "Point", "coordinates": [ -58.424222, -34.798051 ] } },
+{ "type": "Feature", "properties": { "CGM": "Temperley", "NOMBRE": "Mutual Vecinal 9 De Julio Temperley Oeste", "TIPO": "ASOCIACIONES MUTUALES", "Fecha Vencimiento Reconocimiento": "2026-12-21T00:00:00", "LATITUD": -34.785541, "LONGITUD": -58.400885 }, "geometry": { "type": "Point", "coordinates": [ -58.400885, -34.785541 ] } },
+{ "type": "Feature", "properties": { "CGM": "Temperley", "NOMBRE": "Mutual De Suboficiales De La Policia Federal Argentina Delegacion Temperley", "TIPO": "ASOCIACIONES MUTUALES", "Fecha Vencimiento Reconocimiento": "2026-12-21T00:00:00", "LATITUD": -34.776897, "LONGITUD": -58.393749 }, "geometry": { "type": "Point", "coordinates": [ -58.393749, -34.776897 ] } },
+{ "type": "Feature", "properties": { "CGM": "Lomas", "NOMBRE": "Asociacion Mutual De Trabajadores Argentinos Estatales Amtae", "TIPO": "ASOCIACIONES MUTUALES", "Fecha Vencimiento Reconocimiento": "2026-12-21T00:00:00", "LATITUD": -34.760074, "LONGITUD": -58.405875 }, "geometry": { "type": "Point", "coordinates": [ -58.405875, -34.760074 ] } },
+{ "type": "Feature", "properties": { "CGM": "Lomas", "NOMBRE": "Programas Medicos Sociedad Argentina De Consultoria Mutual", "TIPO": "ASOCIACIONES MUTUALES", "Fecha Vencimiento Reconocimiento": "2026-12-21T00:00:00", "LATITUD": -34.758098, "LONGITUD": -58.398893 }, "geometry": { "type": "Point", "coordinates": [ -58.398893, -34.758098 ] } },
+{ "type": "Feature", "properties": { "CGM": "Lomas", "NOMBRE": "Mutual San Miguel De Serino", "TIPO": "ASOCIACIONES MUTUALES", "Fecha Vencimiento Reconocimiento": "2026-12-21T00:00:00", "LATITUD": -34.754042, "LONGITUD": -58.41973 }, "geometry": { "type": "Point", "coordinates": [ -58.41973, -34.754042 ] } }
+]
+}

@@ -1,0 +1,17 @@
+{
+"type": "FeatureCollection",
+"name": "Parques Municipales",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "NOMBRE": "Parque Caaguazú", "DIRECCION": "Caaguazú entre El Tala y Av. Eva Peron" }, "geometry": { "type": "Point", "coordinates": [ -58.344204279042401, -34.748180498624102 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Parque de Lomas", "DIRECCION": "Calle Molina Arrotea & Francisco Siritto" }, "geometry": { "type": "Point", "coordinates": [ -58.43341, -34.7677 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Parque Isabel la Católica", "DIRECCION": "Ortega y Gasset & Isabel la Católica" }, "geometry": { "type": "Point", "coordinates": [ -58.43499, -34.75463 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Parque Llavallol", "DIRECCION": "Boulevard Santa Catalina & Libres del Sur" }, "geometry": { "type": "Point", "coordinates": [ -58.43522, -34.79567 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Parque Municipal Finky", "DIRECCION": "Vicente López y San Basilio" }, "geometry": { "type": "Point", "coordinates": [ -58.39921, -34.78566 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Parque Recondo", "DIRECCION": "Recondo & Gabriel Miró" }, "geometry": { "type": "Point", "coordinates": [ -58.44836, -34.71312 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Parque Santa Catalina", "DIRECCION": "Manuela Pedraza & Soldado Brito" }, "geometry": { "type": "Point", "coordinates": [ -58.47148, -34.74251 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Parque Villa Albertina", "DIRECCION": "Homero & Bayona" }, "geometry": { "type": "Point", "coordinates": [ -58.45876, -34.73976 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Polideportivo 2 de Abril", "DIRECCION": "Padre Carlos Mujica 2621" }, "geometry": { "type": "Point", "coordinates": [ -58.4659, -34.74405 ] } },
+{ "type": "Feature", "properties": { "NOMBRE": "Polideportivo Evita", "DIRECCION": "Atenas & Montiel" }, "geometry": { "type": "Point", "coordinates": [ -58.44719, -34.72936 ] } }
+]
+}
