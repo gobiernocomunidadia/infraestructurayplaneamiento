@@ -160,6 +160,10 @@
                                 <input type="checkbox" id="cb-localidades" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
                                 <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Localidades</span>
                             </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-barrios" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Barrios Populares</span>
+                            </label>
 
                             <div class="mt-4 pt-3 border-t border-[#E6EDF3]">
                                 <h5 class="text-xs font-bold text-[#0B5F8D] uppercase tracking-wider mb-2">Calles Lomas (TIPO PAV.)</h5>
@@ -200,7 +204,7 @@
                         <div class="space-y-3">
                             <label class="flex items-center gap-3 cursor-pointer group">
                                 <input type="checkbox" id="cb-densidad" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
-                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Densidad Poblacional</span>
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Datos de Salud y Población</span>
                             </label>
                             <label class="flex items-center gap-3 cursor-pointer group">
                                 <input type="checkbox" id="cb-pobreza" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
@@ -228,7 +232,7 @@
                             </label>
                             <label class="flex items-center gap-3 cursor-pointer group">
                                 <input type="checkbox" id="cb-soc-fomento" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
-                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Sociedades de Fomento</span>
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Sociedades de Fomento / Civiles</span>
                             </label>
                             <label class="flex items-center gap-3 cursor-pointer group">
                                 <input type="checkbox" id="cb-iglesias" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
@@ -315,6 +319,10 @@
                         </h4>
                         <div class="space-y-3">
                             <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-comisarias" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Comisarías</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
                                 <input type="checkbox" id="cb-camaras" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
                                 <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Cámaras de Seguridad</span>
                             </label>
@@ -389,59 +397,63 @@
 
     <script>
         // ==============================================================================
-        // CONFIGURACIÓN DE GITHUB: PEGA AQUÍ LOS NOMBRES DE TUS ARCHIVOS
+        // CONFIGURACIÓN DE GITHUB: LISTADO EXACTO DE TUS ARCHIVOS
         // ==============================================================================
         const GITHUB_BASE_URL = "https://raw.githubusercontent.com/gobiernocomunidadia/infraestructurayplaneamiento/main/";
         
-        // Simplemente agrega o quita comentarios (//) según los archivos que vayas subiendo a tu repositorio
+        // El array ahora contiene la totalidad de tus archivos (incluidos los de la última tanda)
         const archivosAQLoad = [
             "callejero_lomas_ok.geojson",
-            // "limite_municipal.geojson",
-            // "cgm.geojson",
-            // "localidades.geojson",
-            // "densidad_poblacional.geojson",
-            // "inundables.geojson",
-            // "pobreza.geojson",
-            // "jubilaciones.geojson",
-            // "centros_sanitarios.geojson",
-            // "pavimentacion_concreto.geojson",
-            // "bacheo_concreto.geojson",
-            // "bacheo_frio.geojson",
-            // "bacheo_2024.geojson",
-            // "bacheo_2025.geojson",
-            // "bacheo_2026.geojson",
-            // "camaras.geojson",
-            // "zonas_patrullajes.geojson",
-            // "paradas_seguras.geojson",
-            // "lpr.geojson",
-            // "alarmas.geojson",
-            // "establecimientos_educativos.geojson",
-            // "escolaridad.geojson",
-            // "plazas.geojson",
-            // "parques_municipales.geojson",
-            // "potreros.geojson",
-            // "bicisendas.geojson",
-            // "teatros.geojson",
-            // "sociedades_fomento.geojson",
-            // "iglesias.geojson",
-            // "fundaciones.geojson",
-            // "comedores.geojson",
-            // "clubes_deportivos.geojson",
-            // "club_madres.geojson",
-            // "centros_culturales.geojson",
-            // "centros_jubilados.geojson",
-            // "asociaciones_mutuales.geojson"
+            "Alarmas.geojson",
+            "Asociaciones Civiles.geojson",
+            "Asociaciones Mutuales.geojson",
+            "Bacheo 2024.geojson",
+            "Bacheo 2025.geojson",
+            "Bacheo 2026.geojson",
+            "Bacheo en Concreto.geojson",
+            "Bacheo en Frio.geojson",
+            "Bicisenda.geojson",
+            "Camaras.geojson",
+            "Centro de Jubilados.geojson",
+            "Centros Culturales.geojson",
+            "Centros de Atencion Sanitaria.geojson",
+            "CGM.geojson",
+            "Club de Madres.geojson",
+            "Clubes Deportivos.geojson",
+            "Comedores.geojson",
+            "escolaridad_Lomas de Zamora.geojson",
+            "Establecimientos Educativos.geojson",
+            "barrios_Lomas de Zamora.geojson",
+            "Fundaciones.geojson",
+            "Iglesias.geojson",
+            "indicadores_salud_Lomas de Zamora.geojson",
+            "jubilaciones_pensiones_Lomas de Zamora.geojson",
+            "localidades_Lomas de Zamora.geojson",
+            "LPR.geojson",
+            "municipios_Lomas de Zamora.geojson",
+            "Paradas Seguras.geojson",
+            "Parques Municipales.geojson",
+            "Pavimentacion en Concreto.geojson",
+            "Plazas.geojson",
+            "poblacion_Lomas de Zamora.geojson",
+            "pobreza_cronica_Lomas de Zamora.geojson",
+            "Potreros de la Comunidad.geojson",
+            "seguridad_Lomas de Zamora.geojson",
+            "Sociedades de Fomento.geojson",
+            "Teatros.geojson",
+            "zonas_inundables_Lomas de Zamora.geojson"
         ];
 
         lucide.createIcons();
 
         let map;
-        let layerMunicipios, layerCGM, layerLocalidades, layerZonasInundables, layerDensidad, layerPobreza, layerJubilaciones;
+        let layerMunicipios, layerCGM, layerLocalidades, layerBarrios, layerZonasInundables, layerDensidad, layerPobreza, layerJubilaciones;
         
-        // CAPAS PARA CALLES LOMAS
         let layerCallesHormigon, layerCallesAsfalto, layerCallesRepavimentacion, layerCallesTierra, layerCallesAdoquin, layerCallesDesconocido;
         
-        let layerPavimentacionConcreto, layerBacheoConcreto, layerBacheoFrio, layerBacheo2024, layerBacheo2025, layerBacheo2026, layerCamaras, layerZonasPatrullajes, layerParadasSeguras, layerLPR, layerAlarmas;
+        let layerPavimentacionConcreto, layerBacheoConcreto, layerBacheoFrio, layerBacheo2024, layerBacheo2025, layerBacheo2026;
+        let layerComisarias, layerCamaras, layerZonasPatrullajes, layerParadasSeguras, layerLPR, layerAlarmas;
+        
         let layerTeatros, layerSocFomento, layerIglesias, layerFundaciones, layerComedores, layerClubesDeportivos, layerClubMadres, layerCentrosCulturales, layerCentroJubilados, layerAsociacionesMutuales;
         let layerEstablecimientosEducativos, layerEscolaridad;
         let layerPlazas, layerPotreros, layerBicisendas, layerParquesMunicipales;
@@ -452,6 +464,7 @@
         const svgIconos = {
             factory: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></svg>`,
             camara: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></svg>`,
+            policia: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
             teatros: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
             fomento: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`,
             iglesias: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M7 8h10"/></svg>`,
@@ -476,6 +489,7 @@
             municipios: { color: '#0B5F8D', weight: 3, fillOpacity: 0.05, dashArray: '5,5' },
             cgm: { color: '#4AB5E0', weight: 2, fillOpacity: 0.15 },
             localidades: { color: '#084A6F', weight: 2, fillOpacity: 0.1 },
+            barrios: { color: '#D34872', weight: 2, fillOpacity: 0.15, dashArray: '4,4' },
             zonasInundables: { color: '#EAF1F7', weight: 1, fillOpacity: 0.5 }, 
             
             pavimentacionConcreto: { color: '#D34872', weight: 4, opacity: 0.9 },
@@ -490,6 +504,7 @@
             parquesMunicipales: { tipo: 'punto', svg: svgIconos.parqueMunicipal, color: '#D34872' },
             bicisendas: { color: '#4AB5E0', weight: 4, opacity: 0.9 },
             
+            comisarias: { tipo: 'punto', svg: svgIconos.policia, color: '#0B5F8D' },
             camaras: { tipo: 'punto', svg: svgIconos.camara, color: '#D34872' },
             zonasPatrullajes: { color: '#4AB5E0', weight: 2, fillOpacity: 0.1, dashArray: '5,5' },
             paradasSeguras: { tipo: 'punto', svg: svgIconos.parada, color: '#19567C' },
@@ -517,19 +532,16 @@
         function sanearGeoJSON(data) {
             if (!data || !data.features || !Array.isArray(data.features)) return data;
             
-            // Función para transformar metros (Web Mercator) a grados (Lat/Lng)
             function mercatorToLatLng(coords) {
                 if (Array.isArray(coords) && typeof coords[0] === 'number' && typeof coords[1] === 'number') {
-                    // Si el valor absoluto supera 180, asumimos que NO está en formato Lat/Lng (grados)
                     if (Math.abs(coords[0]) > 180 || Math.abs(coords[1]) > 90) {
                         const lon = (coords[0] / 20037508.342789244) * 180;
                         let lat = (coords[1] / 20037508.342789244) * 180;
                         lat = 180 / Math.PI * (2 * Math.atan(Math.exp(lat * Math.PI / 180)) - Math.PI / 2);
                         return [lon, lat];
                     }
-                    return coords; // Ya está en grados correctos
+                    return coords; 
                 } else if (Array.isArray(coords)) {
-                    // Es un Array de Arrays (Polígonos o Lineas), hacemos recursividad
                     return coords.map(mercatorToLatLng);
                 }
                 return coords;
@@ -539,7 +551,6 @@
                 if (feature && feature.geometry && feature.geometry.coordinates) {
                     let coords = feature.geometry.coordinates;
                     
-                    // Reparación básica por si venían como texto "Lat, Lng"
                     if (Array.isArray(coords) && coords.length === 2 && typeof coords[0] === 'string' && typeof coords[1] === 'string' && !coords[0].includes(',')) {
                         let lng = parseFloat(coords[0]);
                         let lat = parseFloat(coords[1]);
@@ -555,7 +566,6 @@
                         coords = nuevas.length === 1 ? nuevas[0] : nuevas;
                     }
                     
-                    // Aplicar la reproyección para arreglar el problema del mapa gris
                     feature.geometry.coordinates = mercatorToLatLng(coords);
                 }
             });
@@ -605,7 +615,7 @@
                         let props = feature.properties;
                         if(props.partido_ganador) return;
 
-                        let nombreStr = props.Zona ? "Zona " + props.Zona : props['Nombre Ins'] || props.CALLE || props.PLAZA || props.NOMBRE || props.NAME || props.Name || props.Municipio || props.cabecera || props.nombre || props.name || props.Potrero || props.CGM || "Punto de Interés";
+                        let nombreStr = props.NOMBRE_BAR || props.Zona ? "Zona " + props.Zona : props['Nombre Ins'] || props.CALLE || props.PLAZA || props.NOMBRE || props.NAME || props.Name || props.Municipio || props.cabecera || props.nombre || props.name || props.Potrero || props.CGM || "Punto de Interés";
                         
                         if (styleOptions && styleOptions.tipo === 'punto') {
                             layer.bindTooltip(nombreStr, { direction: 'top', offset: [0, -10], className: 'custom-map-tooltip' });
@@ -639,6 +649,7 @@
                 let props = data.features[0].properties;
                 if (props['Habitantes'] !== undefined) propName = 'Habitantes';
                 else if (props['habitantes'] !== undefined) propName = 'habitantes';
+                else if (props['Población total'] !== undefined) propName = 'Población total';
                 else {
                     let candidateKeys = Object.keys(props).filter(k => k.toLowerCase().includes('habitante') || k.toLowerCase().includes('pobla') || k.toLowerCase().includes('pop') || k.toLowerCase() === 'total');
                     if (candidateKeys.length > 0) propName = candidateKeys[0];
@@ -674,7 +685,7 @@
                         let nombreStr = props.NOMBRE || props.NAME || props.Municipio || props.cabecera || props.name || "Geometría";
                         let valStr = propName && props[propName] ? Number(props[propName]).toLocaleString('es-AR') : "Sin datos";
                         
-                        let popupHtml = `<div class="font-sans min-w-[200px]"><h4 class="font-bold text-[#0B5F8D] border-b border-[#E6EDF3] pb-1 mb-2">${nombreStr}</h4><div class="bg-[#EAF1F7] p-2 rounded-md mb-2 border border-[#D1E1F0]"><p class="text-xs font-bold text-[#64748B] uppercase">Habitantes</p><p class="text-xl font-extrabold text-[#0B5F8D]">${valStr}</p></div><ul class="text-xs text-[#64748B] space-y-1">`;
+                        let popupHtml = `<div class="font-sans min-w-[200px]"><h4 class="font-bold text-[#0B5F8D] border-b border-[#E6EDF3] pb-1 mb-2">${nombreStr}</h4><div class="bg-[#EAF1F7] p-2 rounded-md mb-2 border border-[#D1E1F0]"><p class="text-xs font-bold text-[#64748B] uppercase">Dato Principal</p><p class="text-xl font-extrabold text-[#0B5F8D]">${valStr}</p></div><ul class="text-xs text-[#64748B] space-y-1">`;
                         for (let key in props) {
                             if (key !== 'NOMBRE' && key !== 'NAME' && key !== 'Municipio' && key !== propName && props[key] !== null) {
                                 popupHtml += `<li><b class="capitalize">${key.replace(/_/g, ' ')}:</b> ${props[key]}</li>`;
@@ -815,6 +826,7 @@
         // ==============================================================================
         function procesarCapaGeoJson(fileName, data) {
             if (fileName.includes('municipio') || fileName.includes('limite') || fileName.includes('mapa')) agregarGeoJSONAlMapa(data, layerMunicipios, estilosCapas.municipios);
+            else if (fileName.includes('barrio')) agregarGeoJSONAlMapa(data, layerBarrios, estilosCapas.barrios); 
             else if (fileName.includes('cgm') || (data.features && data.features.length > 0 && data.features[0].properties && data.features[0].properties.CGM !== undefined && data.features[0].properties.Manzanas !== undefined)) agregarGeoJSONAlMapa(data, layerCGM, estilosCapas.cgm);
             else if (fileName.includes('localidad')) agregarGeoJSONAlMapa(data, layerLocalidades, estilosCapas.localidades);
             else if (fileName.includes('callejero_lomas')) {
@@ -833,7 +845,7 @@
                 if(featDesc.features.length) agregarGeoJSONAlMapa(featDesc, layerCallesDesconocido, { color: '#D3D3D3', weight: 2, opacity: 0.6 });
             }
             else if (fileName.includes('inundable')) agregarGeoJSONInundables(data, layerZonasInundables);
-            else if (fileName.includes('densidad') || fileName.includes('habitante') || (fileName.includes('poblacion') && fileName.endsWith('.geojson'))) agregarGeoJSONCoropleta(data, layerDensidad);
+            else if (fileName.includes('densidad') || fileName.includes('habitante') || fileName.includes('salud') || (fileName.includes('poblacion') && fileName.endsWith('.geojson'))) agregarGeoJSONCoropleta(data, layerDensidad);
             else if (fileName.includes('pobreza')) agregarGeoJSONPobreza(data, layerPobreza);
             else if (fileName.includes('sanitaria') || fileName.includes('atencion') || fileName.includes('atención')) agregarGeoJSONAlMapa(data, layerCentrosSanitarios, estilosCapas.centrosSanitarios);
             else if (fileName.includes('escolaridad')) agregarGeoJSONCoropleta(data, layerEscolaridad);
@@ -848,13 +860,14 @@
             else if (fileName.includes('plaza')) agregarGeoJSONAlMapa(data, layerPlazas, estilosCapas.plazas);
             else if (fileName.includes('potrero')) agregarGeoJSONAlMapa(data, layerPotreros, estilosCapas.potreros);
             else if (fileName.includes('bicisenda')) agregarGeoJSONAlMapa(data, layerBicisendas, estilosCapas.bicisendas);
+            else if (fileName.includes('seguridad') || fileName.includes('comisaria')) agregarGeoJSONAlMapa(data, layerComisarias, estilosCapas.comisarias);
             else if (fileName.includes('camara') || fileName.includes('cámara')) agregarGeoJSONAlMapa(data, layerCamaras, estilosCapas.camaras);
             else if (fileName.includes('patrullaje')) agregarGeoJSONAlMapa(data, layerZonasPatrullajes, estilosCapas.zonasPatrullajes);
             else if (fileName.includes('parada')) agregarGeoJSONAlMapa(data, layerParadasSeguras, estilosCapas.paradasSeguras);
             else if (fileName.includes('lpr')) agregarGeoJSONAlMapa(data, layerLPR, estilosCapas.lpr);
             else if (fileName.includes('alarma')) agregarGeoJSONAlMapa(data, layerAlarmas, estilosCapas.alarmas);
             else if (fileName.includes('teatro')) agregarGeoJSONAlMapa(data, layerTeatros, estilosCapas.teatros);
-            else if (fileName.includes('fomento')) agregarGeoJSONAlMapa(data, layerSocFomento, estilosCapas.socFomento);
+            else if (fileName.includes('fomento') || fileName.includes('civiles')) agregarGeoJSONAlMapa(data, layerSocFomento, estilosCapas.socFomento);
             else if (fileName.includes('iglesia')) agregarGeoJSONAlMapa(data, layerIglesias, estilosCapas.iglesias);
             else if (fileName.includes('fundacion')) agregarGeoJSONAlMapa(data, layerFundaciones, estilosCapas.fundaciones);
             else if (fileName.includes('comedor')) agregarGeoJSONAlMapa(data, layerComedores, estilosCapas.comedores);
@@ -867,7 +880,7 @@
         }
 
         // ==============================================================================
-        // PETICIÓN ASÍNCRONA A GITHUB (Evita el problema de CORS en navegadores locales)
+        // PETICIÓN ASÍNCRONA A GITHUB (Decodificando espacios en los nombres de archivo)
         // ==============================================================================
         async function cargarGeoJSONDesdeGitHub() {
             if (archivosAQLoad.length === 0) {
@@ -875,20 +888,23 @@
                 return;
             }
 
-            for (let fileName of archivosAQLoad) {
+            for (let fileNameRaw of archivosAQLoad) {
                 try {
-                    let url = GITHUB_BASE_URL + fileName;
+                    // Crea la URL cruda para Github convirtiendo espacios y símbolos especiales
+                    let url = GITHUB_BASE_URL + encodeURIComponent(fileNameRaw);
                     let response = await fetch(url);
                     
                     if (!response.ok) throw new Error(`HTTP ${response.status}`);
                     
                     let data = await response.json();
                     
-                    // Envia los datos recien descargados al ruteador original
-                    procesarCapaGeoJson(fileName.toLowerCase(), data);
+                    // Asegurarnos de que el ruteador reciba el nombre exacto con espacios y no con %20
+                    let fileNameDecoded = decodeURIComponent(fileNameRaw).toLowerCase();
+                    
+                    procesarCapaGeoJson(fileNameDecoded, data);
                     
                 } catch (e) {
-                    console.error("Error al cargar desde GitHub el archivo: " + fileName, e);
+                    console.error("Error al cargar desde GitHub el archivo: " + fileNameRaw, e);
                 }
             }
         }
@@ -907,6 +923,7 @@
             layerMunicipios = L.layerGroup();
             layerCGM = L.layerGroup();
             layerLocalidades = L.layerGroup();
+            layerBarrios = L.layerGroup();
             
             // Subcapas de Calles Lomas
             layerCallesHormigon = L.layerGroup();
@@ -934,6 +951,7 @@
             layerPotreros = L.layerGroup();
             layerBicisendas = L.layerGroup();
             
+            layerComisarias = L.layerGroup();
             layerCamaras = L.layerGroup();
             layerZonasPatrullajes = L.layerGroup();
             layerParadasSeguras = L.layerGroup();
@@ -967,6 +985,7 @@
             setupLayerControl(layerMunicipios, 'cb-municipios');
             setupLayerControl(layerCGM, 'cb-cgm');
             setupLayerControl(layerLocalidades, 'cb-localidades');
+            setupLayerControl(layerBarrios, 'cb-barrios');
             
             setupLayerControl(layerCallesHormigon, 'cb-calles-hormigon');
             setupLayerControl(layerCallesAsfalto, 'cb-calles-asfalto');
@@ -993,6 +1012,7 @@
             setupLayerControl(layerPotreros, 'cb-potreros');
             setupLayerControl(layerBicisendas, 'cb-bicisendas');
             
+            setupLayerControl(layerComisarias, 'cb-comisarias');
             setupLayerControl(layerCamaras, 'cb-camaras');
             setupLayerControl(layerZonasPatrullajes, 'cb-patrullajes');
             setupLayerControl(layerParadasSeguras, 'cb-paradas');
