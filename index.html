@@ -511,46 +511,55 @@
             centrosSanitarios: { tipo: 'punto', svg: svgIconos.hospital, color: '#D34872' }
         };
 
+        // ==============================================================================
+        // SANIDAD Y REPROYECCIÓN DE COORDENADAS (EPSG:3857 -> EPSG:4326)
+        // ==============================================================================
         function sanearGeoJSON(data) {
             if (!data || !data.features || !Array.isArray(data.features)) return data;
+            
+            // Función para transformar metros (Web Mercator) a grados (Lat/Lng)
+            function mercatorToLatLng(coords) {
+                if (Array.isArray(coords) && typeof coords[0] === 'number' && typeof coords[1] === 'number') {
+                    // Si el valor absoluto supera 180, asumimos que NO está en formato Lat/Lng (grados)
+                    if (Math.abs(coords[0]) > 180 || Math.abs(coords[1]) > 90) {
+                        const lon = (coords[0] / 20037508.342789244) * 180;
+                        let lat = (coords[1] / 20037508.342789244) * 180;
+                        lat = 180 / Math.PI * (2 * Math.atan(Math.exp(lat * Math.PI / 180)) - Math.PI / 2);
+                        return [lon, lat];
+                    }
+                    return coords; // Ya está en grados correctos
+                } else if (Array.isArray(coords)) {
+                    // Es un Array de Arrays (Polígonos o Lineas), hacemos recursividad
+                    return coords.map(mercatorToLatLng);
+                }
+                return coords;
+            }
+
             data.features.forEach(feature => {
                 if (feature && feature.geometry && feature.geometry.coordinates) {
                     let coords = feature.geometry.coordinates;
+                    
+                    // Reparación básica por si venían como texto "Lat, Lng"
                     if (Array.isArray(coords) && coords.length === 2 && typeof coords[0] === 'string' && typeof coords[1] === 'string' && !coords[0].includes(',')) {
                         let lng = parseFloat(coords[0]);
                         let lat = parseFloat(coords[1]);
                         if (!isNaN(lng) && !isNaN(lat)) {
-                            feature.geometry.coordinates = [lng, lat];
-                        } else {
-                            feature.geometry.coordinates = null;
+                            coords = [lng, lat];
                         }
-                    }
-                    else if (Array.isArray(coords) && coords.length > 0 && typeof coords[0] === 'string' && coords[0].includes(',')) {
-                        let nuevasCoordenadas = [];
+                    } else if (Array.isArray(coords) && coords.length > 0 && typeof coords[0] === 'string' && coords[0].includes(',')) {
+                        let nuevas = [];
                         for (let i = 0; i < coords.length; i++) {
-                            let coordStr = coords[i];
-                            if (coordStr && typeof coordStr === 'string') {
-                                let partes = coordStr.split(',');
-                                if (partes.length >= 2) {
-                                    let lat = parseFloat(partes[0].trim());
-                                    let lng = parseFloat(partes[1].trim());
-                                    if (!isNaN(lat) && !isNaN(lng)) {
-                                        nuevasCoordenadas.push([lng, lat]);
-                                    }
-                                }
-                            }
+                            let partes = coords[i].split(',');
+                            if (partes.length >= 2) nuevas.push([parseFloat(partes[1].trim()), parseFloat(partes[0].trim())]);
                         }
-                        if (nuevasCoordenadas.length === 0) {
-                            feature.geometry.coordinates = null;
-                        } else if (feature.geometry.type === "Point") {
-                            feature.geometry.coordinates = nuevasCoordenadas[0];
-                        } else {
-                            feature.geometry.type = "MultiPoint";
-                            feature.geometry.coordinates = nuevasCoordenadas;
-                        }
+                        coords = nuevas.length === 1 ? nuevas[0] : nuevas;
                     }
+                    
+                    // Aplicar la reproyección para arreglar el problema del mapa gris
+                    feature.geometry.coordinates = mercatorToLatLng(coords);
                 }
             });
+            
             data.features = data.features.filter(feature => feature && feature.geometry && feature.geometry.coordinates);
             return data;
         }
@@ -802,7 +811,7 @@
         }
 
         // ==============================================================================
-        // LÓGICA DE DETECCIÓN Y ASIGNACIÓN DE CAPAS SEGÚN EL NOMBRE DEL ARCHIVO
+        // ENRUTAMIENTO INTELIGENTE DE CAPAS SEGÚN SU NOMBRE
         // ==============================================================================
         function procesarCapaGeoJson(fileName, data) {
             if (fileName.includes('municipio') || fileName.includes('limite') || fileName.includes('mapa')) agregarGeoJSONAlMapa(data, layerMunicipios, estilosCapas.municipios);
@@ -858,7 +867,7 @@
         }
 
         // ==============================================================================
-        // FUNCIÓN DE PETICIÓN ASÍNCRONA A GITHUB
+        // PETICIÓN ASÍNCRONA A GITHUB (Evita el problema de CORS en navegadores locales)
         // ==============================================================================
         async function cargarGeoJSONDesdeGitHub() {
             if (archivosAQLoad.length === 0) {
@@ -875,7 +884,7 @@
                     
                     let data = await response.json();
                     
-                    // Llama a la lógica de ruteo como lo hacía el antiguo sistema de INJECTED_GEOJSON
+                    // Envia los datos recien descargados al ruteador original
                     procesarCapaGeoJson(fileName.toLowerCase(), data);
                     
                 } catch (e) {
@@ -1021,7 +1030,7 @@
             map.on('zoomend', updateMapZoomClass);
             updateMapZoomClass();
 
-            // LLAMADA AUTOMÁTICA A LA DESCARGA DE REPOSITORIO
+            // EJECUTA LA CARGA AL REPOSITORIO
             cargarGeoJSONDesdeGitHub();
         }
 
