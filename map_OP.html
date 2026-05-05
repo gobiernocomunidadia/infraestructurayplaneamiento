@@ -74,8 +74,10 @@
 
         .map-zoom-far .marker-circle { width: 8px; height: 8px; }
         .map-zoom-far .marker-circle svg { width: 4px; height: 4px; stroke-width: 3px; }
+
         .map-zoom-medium .marker-circle { width: 12px; height: 12px; }
         .map-zoom-medium .marker-circle svg { width: 7px; height: 7px; stroke-width: 2.5px; }
+
         .map-zoom-high .marker-circle { width: 14px; height: 14px; }
         .map-zoom-high .marker-circle svg { width: 8px; height: 8px; stroke-width: 2px; }
         .map-zoom-high .marker-circle:hover { transform: scale(1.3); filter: brightness(1.15); }
@@ -107,6 +109,7 @@
             color: #0F172A !important;
         }
         .tooltip-resultados-2025::before { display: none; }
+
     </style>
 </head>
 <body class="relative min-h-screen flex flex-col">
@@ -125,9 +128,14 @@
 
     <div id="map-view" class="w-full max-w-[1600px] mx-auto py-8 px-4 sm:px-6 lg:px-8 flex-1 flex flex-col">
         
+        <div class="flex flex-col sm:flex-row justify-end items-start sm:items-center mb-6 gap-4 shrink-0">
+            <div id="panel-botones" class="flex flex-wrap items-center gap-3 w-full sm:w-auto">
+            </div>
+        </div>
+
         <div class="flex flex-col lg:flex-row gap-6 flex-1 min-h-[600px]">
             
-            <aside class="w-full lg:w-80 bg-[#FFFFFF] rounded-xl shadow-md border border-[#E6EDF3] flex flex-col relative z-20 shrink-0 max-h-[500px] lg:max-h-[calc(100vh-150px)]">
+            <aside class="w-full lg:w-80 bg-[#FFFFFF] rounded-xl shadow-md border border-[#E6EDF3] flex flex-col relative z-20 shrink-0 max-h-[500px] lg:max-h-[calc(100vh-200px)]">
                 <div class="p-4 border-b border-[#E6EDF3] bg-[#F3F6F9] rounded-t-xl flex items-center gap-2 shrink-0">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-filter text-[#0B5F8D] h-5 w-5"><path d="M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z"></path></svg>
                     <h3 class="font-bold text-[#0F172A] uppercase tracking-wide text-sm">Capas y Filtros</h3>
@@ -141,7 +149,7 @@
                         </h4>
                         <div class="space-y-3">
                             <label class="flex items-center gap-3 cursor-pointer group">
-                                <input type="checkbox" id="cb-municipios" checked="" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <input type="checkbox" id="cb-municipios" checked class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
                                 <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Límite Territorial</span>
                             </label>
                             <label class="flex items-center gap-3 cursor-pointer group">
@@ -381,20 +389,48 @@
 
     <script>
         // ==============================================================================
-        // CONFIGURACIÓN DE GITHUB: PEGA AQUÍ TUS URLs RAW
+        // CONFIGURACIÓN DE GITHUB: PEGA AQUÍ LOS NOMBRES DE TUS ARCHIVOS
         // ==============================================================================
-        // Aquí debes listar todas las rutas crudas (raw) de tus archivos GeoJSON en GitHub.
-        // OJO: Si tu rama principal no es "main", cambia "main" por "master" en la URL.
-        const urlsGeoJSON = [
-            "https://raw.githubusercontent.com/gobiernocomunidadia/infraestructurayplaneamiento/main/callejero_lomas_ok.geojson",
-            // Simplemente descomenta (quita las //) y reemplaza con los nombres exactos de tus archivos:
-            // "https://raw.githubusercontent.com/gobiernocomunidadia/infraestructurayplaneamiento/main/limite_municipal.geojson",
-            // "https://raw.githubusercontent.com/gobiernocomunidadia/infraestructurayplaneamiento/main/cgm.geojson",
-            // "https://raw.githubusercontent.com/gobiernocomunidadia/infraestructurayplaneamiento/main/localidades.geojson",
-            // "https://raw.githubusercontent.com/gobiernocomunidadia/infraestructurayplaneamiento/main/inundables.geojson",
-            // "https://raw.githubusercontent.com/gobiernocomunidadia/infraestructurayplaneamiento/main/densidad_poblacional.geojson",
-            // "https://raw.githubusercontent.com/gobiernocomunidadia/infraestructurayplaneamiento/main/pobreza.geojson",
-            // "https://raw.githubusercontent.com/gobiernocomunidadia/infraestructurayplaneamiento/main/jubilaciones.geojson"
+        const GITHUB_BASE_URL = "https://raw.githubusercontent.com/gobiernocomunidadia/infraestructurayplaneamiento/main/";
+        
+        // Simplemente agrega o quita comentarios (//) según los archivos que vayas subiendo a tu repositorio
+        const archivosAQLoad = [
+            "callejero_lomas_ok.geojson",
+            // "limite_municipal.geojson",
+            // "cgm.geojson",
+            // "localidades.geojson",
+            // "densidad_poblacional.geojson",
+            // "inundables.geojson",
+            // "pobreza.geojson",
+            // "jubilaciones.geojson",
+            // "centros_sanitarios.geojson",
+            // "pavimentacion_concreto.geojson",
+            // "bacheo_concreto.geojson",
+            // "bacheo_frio.geojson",
+            // "bacheo_2024.geojson",
+            // "bacheo_2025.geojson",
+            // "bacheo_2026.geojson",
+            // "camaras.geojson",
+            // "zonas_patrullajes.geojson",
+            // "paradas_seguras.geojson",
+            // "lpr.geojson",
+            // "alarmas.geojson",
+            // "establecimientos_educativos.geojson",
+            // "escolaridad.geojson",
+            // "plazas.geojson",
+            // "parques_municipales.geojson",
+            // "potreros.geojson",
+            // "bicisendas.geojson",
+            // "teatros.geojson",
+            // "sociedades_fomento.geojson",
+            // "iglesias.geojson",
+            // "fundaciones.geojson",
+            // "comedores.geojson",
+            // "clubes_deportivos.geojson",
+            // "club_madres.geojson",
+            // "centros_culturales.geojson",
+            // "centros_jubilados.geojson",
+            // "asociaciones_mutuales.geojson"
         ];
 
         lucide.createIcons();
@@ -415,7 +451,6 @@
 
         const svgIconos = {
             factory: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></svg>`,
-            pj: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 22h18M6 18v-7M10 18v-7M14 18v-7M18 18v-7M12 2l8 5H4z"/></svg>`,
             camara: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></svg>`,
             teatros: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
             fomento: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`,
@@ -766,7 +801,9 @@
             actualizarLimitesMapa(geoLayer);
         }
 
-        // SISTEMA DE ENRUTAMIENTO INTELIGENTE DE CAPAS
+        // ==============================================================================
+        // LÓGICA DE DETECCIÓN Y ASIGNACIÓN DE CAPAS SEGÚN EL NOMBRE DEL ARCHIVO
+        // ==============================================================================
         function procesarCapaGeoJson(fileName, data) {
             if (fileName.includes('municipio') || fileName.includes('limite') || fileName.includes('mapa')) agregarGeoJSONAlMapa(data, layerMunicipios, estilosCapas.municipios);
             else if (fileName.includes('cgm') || (data.features && data.features.length > 0 && data.features[0].properties && data.features[0].properties.CGM !== undefined && data.features[0].properties.Manzanas !== undefined)) agregarGeoJSONAlMapa(data, layerCGM, estilosCapas.cgm);
@@ -821,28 +858,28 @@
         }
 
         // ==============================================================================
-        // FUNCIÓN QUE DESCARGA LOS ARCHIVOS AUTOMÁTICAMENTE DE GITHUB
+        // FUNCIÓN DE PETICIÓN ASÍNCRONA A GITHUB
         // ==============================================================================
         async function cargarGeoJSONDesdeGitHub() {
-            if (urlsGeoJSON.length === 0) {
-                console.warn("No hay URLs configuradas en la variable 'urlsGeoJSON'. Por favor, agrégalas.");
+            if (archivosAQLoad.length === 0) {
+                console.warn("No hay archivos configurados para cargar en 'archivosAQLoad'.");
                 return;
             }
 
-            for (let url of urlsGeoJSON) {
+            for (let fileName of archivosAQLoad) {
                 try {
+                    let url = GITHUB_BASE_URL + fileName;
                     let response = await fetch(url);
+                    
                     if (!response.ok) throw new Error(`HTTP ${response.status}`);
                     
                     let data = await response.json();
                     
-                    // Extraemos el nombre del archivo de la URL para saber qué icono ponerle
-                    let fileName = url.split('/').pop().toLowerCase();
+                    // Llama a la lógica de ruteo como lo hacía el antiguo sistema de INJECTED_GEOJSON
+                    procesarCapaGeoJson(fileName.toLowerCase(), data);
                     
-                    // Procesamos la capa y la dibujamos
-                    procesarCapaGeoJson(fileName, data);
                 } catch (e) {
-                    console.error("Error al cargar y procesar desde GitHub la URL: " + url, e);
+                    console.error("Error al cargar desde GitHub el archivo: " + fileName, e);
                 }
             }
         }
@@ -862,7 +899,7 @@
             layerCGM = L.layerGroup();
             layerLocalidades = L.layerGroup();
             
-            // Subcapas de Calles Lomas por Pavimentación
+            // Subcapas de Calles Lomas
             layerCallesHormigon = L.layerGroup();
             layerCallesAsfalto = L.layerGroup();
             layerCallesRepavimentacion = L.layerGroup();
@@ -922,7 +959,6 @@
             setupLayerControl(layerCGM, 'cb-cgm');
             setupLayerControl(layerLocalidades, 'cb-localidades');
             
-            // Setup Subcapas Calles Lomas
             setupLayerControl(layerCallesHormigon, 'cb-calles-hormigon');
             setupLayerControl(layerCallesAsfalto, 'cb-calles-asfalto');
             setupLayerControl(layerCallesRepavimentacion, 'cb-calles-repavimentacion');
@@ -935,6 +971,7 @@
             setupLayerControl(layerPobreza, 'cb-pobreza');
             setupLayerControl(layerCentrosSanitarios, 'cb-centros-sanitarios');
             setupLayerControl(layerJubilaciones, 'cb-jubilaciones');
+            
             setupLayerControl(layerPavimentacionConcreto, 'cb-pavimentacion-concreto');
             setupLayerControl(layerBacheoConcreto, 'cb-bacheo-concreto');
             setupLayerControl(layerBacheoFrio, 'cb-bacheo-frio');
@@ -984,7 +1021,7 @@
             map.on('zoomend', updateMapZoomClass);
             updateMapZoomClass();
 
-            // LLAMADA A LA FUNCIÓN QUE CARGA LOS ARCHIVOS DESDE GITHUB
+            // LLAMADA AUTOMÁTICA A LA DESCARGA DE REPOSITORIO
             cargarGeoJSONDesdeGitHub();
         }
 
