@@ -11,7 +11,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest" crossorigin="anonymous"></script>
     
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
@@ -41,17 +41,14 @@
             margin: 0;
         }
         
-        /* Asegurar que el mapa no se superponga con otros elementos z-index */
         #map { z-index: 10; }
         .leaflet-control-layers { font-family: 'Montserrat', sans-serif; }
 
-        /* Scrollbar personalizado usando la paleta */
         .custom-scrollbar::-webkit-scrollbar { width: 6px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: #F3F6F9; border-radius: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #E6EDF3; border-radius: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #64748B; }
 
-        /* ESTILOS CUSTOM PARA CLUSTERS */
         .marker-cluster-small, .marker-cluster-medium, .marker-cluster-large {
             background-color: rgba(11, 95, 141, 0.6) !important;
         }
@@ -62,11 +59,9 @@
             font-weight: 700;
         }
 
-        /* SISTEMA DE MARCADORES GEOESPACIALES - ZOOM AWARE */
         .custom-div-icon { background: none; border: none; }
         .marker-container { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
         
-        /* Estructura Base Obligatoria */
         .marker-circle {
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
@@ -77,20 +72,14 @@
         }
         .marker-circle svg { transition: all 0.3s ease; }
 
-        /* Nivel de Zoom Lejano (< 13) */
         .map-zoom-far .marker-circle { width: 8px; height: 8px; }
         .map-zoom-far .marker-circle svg { width: 4px; height: 4px; stroke-width: 3px; }
-
-        /* Nivel de Zoom Medio (13 a 15) */
         .map-zoom-medium .marker-circle { width: 12px; height: 12px; }
         .map-zoom-medium .marker-circle svg { width: 7px; height: 7px; stroke-width: 2.5px; }
-
-        /* Nivel de Zoom Alto (> 15) */
         .map-zoom-high .marker-circle { width: 14px; height: 14px; }
         .map-zoom-high .marker-circle svg { width: 8px; height: 8px; stroke-width: 2px; }
         .map-zoom-high .marker-circle:hover { transform: scale(1.3); filter: brightness(1.15); }
 
-        /* Tooltip Externo */
         .custom-map-tooltip {
             background-color: #0F172A;
             color: #FFFFFF;
@@ -105,10 +94,8 @@
         }
         .custom-map-tooltip::before { display: none; }
         
-        /* FIX UX: Ocultar SOLO los tooltips de marcadores cuando el zoom es lejano */
         #map:not(.map-zoom-high) .custom-map-tooltip { display: none !important; }
 
-        /* TOOLTIP UX PARA RESULTADOS */
         .tooltip-resultados-2025 {
             background-color: rgba(255, 255, 255, 0.98) !important;
             border: 1px solid #E6EDF3 !important;
@@ -120,7 +107,6 @@
             color: #0F172A !important;
         }
         .tooltip-resultados-2025::before { display: none; }
-
     </style>
 </head>
 <body class="relative min-h-screen flex flex-col">
@@ -139,16 +125,11 @@
 
     <div id="map-view" class="w-full max-w-[1600px] mx-auto py-8 px-4 sm:px-6 lg:px-8 flex-1 flex flex-col">
         
-        <div class="flex flex-col sm:flex-row justify-end items-start sm:items-center mb-6 gap-4 shrink-0">
-            <div id="panel-botones" class="flex flex-wrap items-center gap-3 w-full sm:w-auto">
-            </div>
-        </div>
-
         <div class="flex flex-col lg:flex-row gap-6 flex-1 min-h-[600px]">
             
-            <aside class="w-full lg:w-80 bg-[#FFFFFF] rounded-xl shadow-md border border-[#E6EDF3] flex flex-col relative z-20 shrink-0 max-h-[500px] lg:max-h-[calc(100vh-200px)]">
+            <aside class="w-full lg:w-80 bg-[#FFFFFF] rounded-xl shadow-md border border-[#E6EDF3] flex flex-col relative z-20 shrink-0 max-h-[500px] lg:max-h-[calc(100vh-150px)]">
                 <div class="p-4 border-b border-[#E6EDF3] bg-[#F3F6F9] rounded-t-xl flex items-center gap-2 shrink-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="filter" aria-hidden="true" class="lucide lucide-filter text-[#0B5F8D] h-5 w-5"><path d="M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z"></path></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-filter text-[#0B5F8D] h-5 w-5"><path d="M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z"></path></svg>
                     <h3 class="font-bold text-[#0F172A] uppercase tracking-wide text-sm">Capas y Filtros</h3>
                 </div>
                 
@@ -156,7 +137,7 @@
                     
                     <div class="border-t border-[#E6EDF3] pt-4">
                         <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="map" aria-hidden="true" class="lucide lucide-map h-4 w-4"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"></path><path d="M15 5.764v15"></path><path d="M9 3.236v15"></path></svg> División Territorial
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map h-4 w-4"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"></path><path d="M15 5.764v15"></path><path d="M9 3.236v15"></path></svg> División Territorial
                         </h4>
                         <div class="space-y-3">
                             <label class="flex items-center gap-3 cursor-pointer group">
@@ -170,10 +151,6 @@
                             <label class="flex items-center gap-3 cursor-pointer group">
                                 <input type="checkbox" id="cb-localidades" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
                                 <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Localidades</span>
-                            </label>
-                            <label class="flex items-center gap-3 cursor-pointer group">
-                                <input type="checkbox" id="cb-circuitos" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
-                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Circuitos Electorales</span>
                             </label>
 
                             <div class="mt-4 pt-3 border-t border-[#E6EDF3]">
@@ -210,7 +187,7 @@
 
                     <div class="border-t border-[#E6EDF3] pt-4">
                         <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="pie-chart" aria-hidden="true" class="lucide lucide-pie-chart h-4 w-4"><path d="M21 12c.552 0 1.005-.449.95-.998a10 10 0 0 0-8.953-8.951c-.55-.055-.998.398-.998.95v8a1 1 0 0 0 1 1z"></path><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path></svg> Demografía y Zonificación
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pie-chart h-4 w-4"><path d="M21 12c.552 0 1.005-.449.95-.998a10 10 0 0 0-8.953-8.951c-.55-.055-.998.398-.998.95v8a1 1 0 0 0 1 1z"></path><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path></svg> Demografía y Zonificación
                         </h4>
                         <div class="space-y-3">
                             <label class="flex items-center gap-3 cursor-pointer group">
@@ -282,7 +259,7 @@
 
                     <div class="border-t border-[#E6EDF3] pt-4">
                         <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="stethoscope" aria-hidden="true" class="lucide lucide-stethoscope h-4 w-4"><path d="M11 2v2"></path><path d="M5 2v2"></path><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"></path><path d="M8 15a6 6 0 0 0 12 0v-3"></path><circle cx="20" cy="10" r="2"></circle></svg> Salud Pública
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-stethoscope h-4 w-4"><path d="M11 2v2"></path><path d="M5 2v2"></path><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"></path><path d="M8 15a6 6 0 0 0 12 0v-3"></path><circle cx="20" cy="10" r="2"></circle></svg> Salud Pública
                         </h4>
                         <div class="space-y-3">
                             <label class="flex items-center gap-3 cursor-pointer group">
@@ -402,17 +379,28 @@
         </div>
     </div>
 
-    <div class="text-center mt-auto mb-6 text-[#64748B] text-sm font-medium">
-        Sistema de Información Territorial v5.0 (Visualizador Geoespacial)
-    </div>
-
     <script>
-        // Inicializar Iconos Lucide
+        // ==============================================================================
+        // CONFIGURACIÓN DE GITHUB: PEGA AQUÍ TUS URLs RAW
+        // ==============================================================================
+        // Aquí debes listar todas las rutas crudas (raw) de tus archivos GeoJSON en GitHub.
+        // OJO: Si tu rama principal no es "main", cambia "main" por "master" en la URL.
+        const urlsGeoJSON = [
+            "https://raw.githubusercontent.com/gobiernocomunidadia/infraestructurayplaneamiento/main/callejero_lomas_ok.geojson",
+            // Simplemente descomenta (quita las //) y reemplaza con los nombres exactos de tus archivos:
+            // "https://raw.githubusercontent.com/gobiernocomunidadia/infraestructurayplaneamiento/main/limite_municipal.geojson",
+            // "https://raw.githubusercontent.com/gobiernocomunidadia/infraestructurayplaneamiento/main/cgm.geojson",
+            // "https://raw.githubusercontent.com/gobiernocomunidadia/infraestructurayplaneamiento/main/localidades.geojson",
+            // "https://raw.githubusercontent.com/gobiernocomunidadia/infraestructurayplaneamiento/main/inundables.geojson",
+            // "https://raw.githubusercontent.com/gobiernocomunidadia/infraestructurayplaneamiento/main/densidad_poblacional.geojson",
+            // "https://raw.githubusercontent.com/gobiernocomunidadia/infraestructurayplaneamiento/main/pobreza.geojson",
+            // "https://raw.githubusercontent.com/gobiernocomunidadia/infraestructurayplaneamiento/main/jubilaciones.geojson"
+        ];
+
         lucide.createIcons();
 
-        // Variables Globales del Mapa y Estado
         let map;
-        let layerMunicipios, layerCGM, layerLocalidades, layerZonasInundables, layerDensidad, layerCircuitos, layerPobreza, layerJubilaciones;
+        let layerMunicipios, layerCGM, layerLocalidades, layerZonasInundables, layerDensidad, layerPobreza, layerJubilaciones;
         
         // CAPAS PARA CALLES LOMAS
         let layerCallesHormigon, layerCallesAsfalto, layerCallesRepavimentacion, layerCallesTierra, layerCallesAdoquin, layerCallesDesconocido;
@@ -425,9 +413,6 @@
         let isMapInitialized = false;
         let mapBounds = null;
 
-        window.savedGeoJSONData = window.savedGeoJSONData || [];
-
-        /* ICONOGRAFÍA SVG MINIMALISTA PARA MARCADORES (LUCIDE BASE) */
         const svgIconos = {
             factory: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></svg>`,
             pj: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 22h18M6 18v-7M10 18v-7M14 18v-7M18 18v-7M12 2l8 5H4z"/></svg>`,
@@ -445,8 +430,6 @@
             potreros: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 12 16 10 12 6 8 10 12 12z"/><path d="M12 12v5"/><path d="M16 10l4.5 2.5"/><path d="M8 10 3.5 12.5"/><path d="M12 17l-4.5 2.5"/><path d="M12 17l4.5 2.5"/></svg>`,
             alarma: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>`,
             lpr: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>`,
-            modulos: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
-            car: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a2 2 0 0 0-1.6-.8H8.3a2 2 0 0 0-1.6.8L4 11l-5.16.86a1 1 0 0 0-.84.99V16h3"/><circle cx="6.5" cy="16.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></svg>`,
             parada: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
             educacion: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>`,
             plazas: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-8"/><path d="m8 14-2.5-2.5a3.5 3.5 0 0 1 5-5 5 5 0 0 1 7 5 3.5 3.5 0 0 1-2.5 2.5Z"/></svg>`,
@@ -457,27 +440,26 @@
         const estilosCapas = {
             municipios: { color: '#0B5F8D', weight: 3, fillOpacity: 0.05, dashArray: '5,5' },
             cgm: { color: '#4AB5E0', weight: 2, fillOpacity: 0.15 },
-            circuitos: { color: '#0B5F8D', weight: 2, fillOpacity: 0.1, dashArray: '4,4' },
             localidades: { color: '#084A6F', weight: 2, fillOpacity: 0.1 },
             zonasInundables: { color: '#EAF1F7', weight: 1, fillOpacity: 0.5 }, 
             
-            pavimentacionConcreto: { color: '#D34872', weight: 4, opacity: 0.9 }, // Magenta
-            bacheoConcreto: { color: '#FFFFFF', radius: 5, fillColor: '#19567C', weight: 1.5, fillOpacity: 0.9 }, // Azul Inst
-            bacheoFrio: { color: '#FFFFFF', radius: 5, fillColor: '#4AB5E0', weight: 1.5, fillOpacity: 0.9 }, // Acento Celeste
-            bacheo2024: { color: '#FFFFFF', radius: 5, fillColor: '#64748B', weight: 1.5, fillOpacity: 0.9 }, // Gris Pizarra
-            bacheo2025: { color: '#FFFFFF', radius: 5, fillColor: '#2A7FA8', weight: 1.5, fillOpacity: 0.9 }, // Azul Medio
-            bacheo2026: { color: '#FFFFFF', radius: 5, fillColor: '#D34872', weight: 1.5, fillOpacity: 0.9 }, // Magenta
+            pavimentacionConcreto: { color: '#D34872', weight: 4, opacity: 0.9 },
+            bacheoConcreto: { color: '#FFFFFF', radius: 5, fillColor: '#19567C', weight: 1.5, fillOpacity: 0.9 },
+            bacheoFrio: { color: '#FFFFFF', radius: 5, fillColor: '#4AB5E0', weight: 1.5, fillOpacity: 0.9 },
+            bacheo2024: { color: '#FFFFFF', radius: 5, fillColor: '#64748B', weight: 1.5, fillOpacity: 0.9 },
+            bacheo2025: { color: '#FFFFFF', radius: 5, fillColor: '#2A7FA8', weight: 1.5, fillOpacity: 0.9 },
+            bacheo2026: { color: '#FFFFFF', radius: 5, fillColor: '#D34872', weight: 1.5, fillOpacity: 0.9 },
             
-            potreros: { tipo: 'punto', svg: svgIconos.potreros, color: '#4AB5E0' }, // Acento Celeste
-            plazas: { tipo: 'punto', svg: svgIconos.plazas, color: '#19567C' }, // Azul Inst
-            parquesMunicipales: { tipo: 'punto', svg: svgIconos.parqueMunicipal, color: '#D34872' }, // Magenta (Contraste)
-            bicisendas: { color: '#4AB5E0', weight: 4, opacity: 0.9 }, // Línea gruesa de acento
+            potreros: { tipo: 'punto', svg: svgIconos.potreros, color: '#4AB5E0' },
+            plazas: { tipo: 'punto', svg: svgIconos.plazas, color: '#19567C' },
+            parquesMunicipales: { tipo: 'punto', svg: svgIconos.parqueMunicipal, color: '#D34872' },
+            bicisendas: { color: '#4AB5E0', weight: 4, opacity: 0.9 },
             
-            camaras: { tipo: 'punto', svg: svgIconos.camara, color: '#D34872' }, // Magenta
-            zonasPatrullajes: { color: '#4AB5E0', weight: 2, fillOpacity: 0.1, dashArray: '5,5' }, // Acento (Polígonos)
-            paradasSeguras: { tipo: 'punto', svg: svgIconos.parada, color: '#19567C' }, // Azul Inst
-            lpr: { tipo: 'punto', svg: svgIconos.lpr, color: '#4AB5E0' }, // Acento
-            alarmas: { tipo: 'punto', svg: svgIconos.alarma, color: '#19567C' }, // Azul Inst
+            camaras: { tipo: 'punto', svg: svgIconos.camara, color: '#D34872' },
+            zonasPatrullajes: { color: '#4AB5E0', weight: 2, fillOpacity: 0.1, dashArray: '5,5' },
+            paradasSeguras: { tipo: 'punto', svg: svgIconos.parada, color: '#19567C' },
+            lpr: { tipo: 'punto', svg: svgIconos.lpr, color: '#4AB5E0' },
+            alarmas: { tipo: 'punto', svg: svgIconos.alarma, color: '#19567C' },
             
             teatros: { tipo: 'punto', svg: svgIconos.teatros, color: '#D34872' },
             socFomento: { tipo: 'punto', svg: svgIconos.fomento, color: '#4AB5E0' },
@@ -496,11 +478,9 @@
 
         function sanearGeoJSON(data) {
             if (!data || !data.features || !Array.isArray(data.features)) return data;
-            
             data.features.forEach(feature => {
                 if (feature && feature.geometry && feature.geometry.coordinates) {
                     let coords = feature.geometry.coordinates;
-                    
                     if (Array.isArray(coords) && coords.length === 2 && typeof coords[0] === 'string' && typeof coords[1] === 'string' && !coords[0].includes(',')) {
                         let lng = parseFloat(coords[0]);
                         let lat = parseFloat(coords[1]);
@@ -525,7 +505,6 @@
                                 }
                             }
                         }
-
                         if (nuevasCoordenadas.length === 0) {
                             feature.geometry.coordinates = null;
                         } else if (feature.geometry.type === "Point") {
@@ -537,7 +516,6 @@
                     }
                 }
             });
-            
             data.features = data.features.filter(feature => feature && feature.geometry && feature.geometry.coordinates);
             return data;
         }
@@ -568,12 +546,7 @@
                 pointToLayer: function (feature, latlng) {
                     if (styleOptions && styleOptions.tipo === 'punto') {
                         const iconHtml = `<div class="marker-container"><div class="marker-circle" style="background-color: ${styleOptions.color};">${styleOptions.svg}</div></div>`;
-                        const customIcon = L.divIcon({
-                            html: iconHtml,
-                            className: 'custom-div-icon',
-                            iconSize: [24, 24], 
-                            iconAnchor: [12, 12]
-                        });
+                        const customIcon = L.divIcon({ html: iconHtml, className: 'custom-div-icon', iconSize: [24, 24], iconAnchor: [12, 12] });
                         return L.marker(latlng, { icon: customIcon });
                     } else {
                         let radius = styleOptions && styleOptions.radius ? styleOptions.radius : 6;
@@ -795,18 +768,16 @@
 
         // SISTEMA DE ENRUTAMIENTO INTELIGENTE DE CAPAS
         function procesarCapaGeoJson(fileName, data) {
-            if (fileName.includes('circuito')) agregarGeoJSONAlMapa(data, layerCircuitos, estilosCapas.circuitos);
-            else if (fileName.includes('municipio') || fileName.includes('limite') || fileName.includes('mapa')) agregarGeoJSONAlMapa(data, layerMunicipios, estilosCapas.municipios);
+            if (fileName.includes('municipio') || fileName.includes('limite') || fileName.includes('mapa')) agregarGeoJSONAlMapa(data, layerMunicipios, estilosCapas.municipios);
             else if (fileName.includes('cgm') || (data.features && data.features.length > 0 && data.features[0].properties && data.features[0].properties.CGM !== undefined && data.features[0].properties.Manzanas !== undefined)) agregarGeoJSONAlMapa(data, layerCGM, estilosCapas.cgm);
             else if (fileName.includes('localidad')) agregarGeoJSONAlMapa(data, layerLocalidades, estilosCapas.localidades);
             else if (fileName.includes('callejero_lomas')) {
-                // Procesamiento dinámico para Calles de Lomas segregado por "Tipo Pavimento"
-                let featHormigon = { type: "FeatureCollection", features: data.features.filter(f => f.properties['Tipo Pavimento'] === "HORMIGON") };
-                let featAsfalto = { type: "FeatureCollection", features: data.features.filter(f => f.properties['Tipo Pavimento'] === "CONCRETO ASFALTICO") };
-                let featRepav = { type: "FeatureCollection", features: data.features.filter(f => f.properties['Tipo Pavimento'] === "REPAVIMENTACION") };
-                let featTierra = { type: "FeatureCollection", features: data.features.filter(f => f.properties['Tipo Pavimento'] === "TIERRA") };
-                let featAdoquin = { type: "FeatureCollection", features: data.features.filter(f => f.properties['Tipo Pavimento'] === "ADOQUIN") };
-                let featDesc = { type: "FeatureCollection", features: data.features.filter(f => f.properties['Tipo Pavimento'] === "DESCONOCIDO" || !f.properties['Tipo Pavimento']) };
+                let featHormigon = { type: "FeatureCollection", features: data.features.filter(f => f.properties['Tipo Pavimento'] === "HORMIGON" || f.properties.TIPO_PAV === "HORMIGON") };
+                let featAsfalto = { type: "FeatureCollection", features: data.features.filter(f => f.properties['Tipo Pavimento'] === "CONCRETO ASFALTICO" || f.properties.TIPO_PAV === "CONCRETO ASFALTICO") };
+                let featRepav = { type: "FeatureCollection", features: data.features.filter(f => f.properties['Tipo Pavimento'] === "REPAVIMENTACION" || f.properties.TIPO_PAV === "REPAVIMENTACION") };
+                let featTierra = { type: "FeatureCollection", features: data.features.filter(f => f.properties['Tipo Pavimento'] === "TIERRA" || f.properties.TIPO_PAV === "TIERRA") };
+                let featAdoquin = { type: "FeatureCollection", features: data.features.filter(f => f.properties['Tipo Pavimento'] === "ADOQUIN" || f.properties.TIPO_PAV === "ADOQUIN") };
+                let featDesc = { type: "FeatureCollection", features: data.features.filter(f => f.properties['Tipo Pavimento'] === "DESCONOCIDO" || f.properties.TIPO_PAV === "DESCONOCIDO" || (!f.properties['Tipo Pavimento'] && !f.properties.TIPO_PAV)) };
 
                 if(featHormigon.features.length) agregarGeoJSONAlMapa(featHormigon, layerCallesHormigon, { color: '#9CA3AF', weight: 3, opacity: 0.9 });
                 if(featAsfalto.features.length) agregarGeoJSONAlMapa(featAsfalto, layerCallesAsfalto, { color: '#1F2937', weight: 3, opacity: 0.9 });
@@ -849,6 +820,33 @@
             else if (fileName.includes('establecimiento') || fileName.includes('educativo')) agregarGeoJSONAlMapa(data, layerEstablecimientosEducativos, estilosCapas.establecimientosEducativos);
         }
 
+        // ==============================================================================
+        // FUNCIÓN QUE DESCARGA LOS ARCHIVOS AUTOMÁTICAMENTE DE GITHUB
+        // ==============================================================================
+        async function cargarGeoJSONDesdeGitHub() {
+            if (urlsGeoJSON.length === 0) {
+                console.warn("No hay URLs configuradas en la variable 'urlsGeoJSON'. Por favor, agrégalas.");
+                return;
+            }
+
+            for (let url of urlsGeoJSON) {
+                try {
+                    let response = await fetch(url);
+                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                    
+                    let data = await response.json();
+                    
+                    // Extraemos el nombre del archivo de la URL para saber qué icono ponerle
+                    let fileName = url.split('/').pop().toLowerCase();
+                    
+                    // Procesamos la capa y la dibujamos
+                    procesarCapaGeoJson(fileName, data);
+                } catch (e) {
+                    console.error("Error al cargar y procesar desde GitHub la URL: " + url, e);
+                }
+            }
+        }
+
         function initMap() {
             const mapContainer = document.getElementById('map');
             if (!mapContainer) return;
@@ -863,7 +861,6 @@
             layerMunicipios = L.layerGroup();
             layerCGM = L.layerGroup();
             layerLocalidades = L.layerGroup();
-            layerCircuitos = L.layerGroup();
             
             // Subcapas de Calles Lomas por Pavimentación
             layerCallesHormigon = L.layerGroup();
@@ -879,7 +876,6 @@
             layerJubilaciones = L.layerGroup();
             layerCentrosSanitarios = L.layerGroup();
             
-            // Grupos Obras Públicas
             layerPavimentacionConcreto = L.layerGroup();
             layerBacheoConcreto = L.layerGroup();
             layerBacheoFrio = L.layerGroup();
@@ -887,20 +883,17 @@
             layerBacheo2025 = L.layerGroup();
             layerBacheo2026 = L.layerGroup();
             
-            // Grupos Espacios Públicos
             layerPlazas = L.layerGroup();
             layerParquesMunicipales = L.layerGroup();
             layerPotreros = L.layerGroup();
             layerBicisendas = L.layerGroup();
             
-            // Grupo Seguridad
             layerCamaras = L.layerGroup();
             layerZonasPatrullajes = L.layerGroup();
             layerParadasSeguras = L.layerGroup();
             layerLPR = L.layerGroup();
             layerAlarmas = L.layerGroup();
             
-            // Grupos Instituciones
             layerTeatros = L.layerGroup();
             layerSocFomento = L.layerGroup();
             layerIglesias = L.layerGroup();
@@ -912,7 +905,6 @@
             layerCentroJubilados = L.layerGroup();
             layerAsociacionesMutuales = L.layerGroup();
             
-            // Grupos Educación
             layerEstablecimientosEducativos = L.layerGroup();
             layerEscolaridad = L.layerGroup();
 
@@ -928,7 +920,6 @@
 
             setupLayerControl(layerMunicipios, 'cb-municipios');
             setupLayerControl(layerCGM, 'cb-cgm');
-            setupLayerControl(layerCircuitos, 'cb-circuitos');
             setupLayerControl(layerLocalidades, 'cb-localidades');
             
             // Setup Subcapas Calles Lomas
@@ -951,20 +942,17 @@
             setupLayerControl(layerBacheo2025, 'cb-bacheo-2025');
             setupLayerControl(layerBacheo2026, 'cb-bacheo-2026');
             
-            // Controles de Espacios Públicos
             setupLayerControl(layerPlazas, 'cb-plazas');
             setupLayerControl(layerParquesMunicipales, 'cb-parques-municipales');
             setupLayerControl(layerPotreros, 'cb-potreros');
             setupLayerControl(layerBicisendas, 'cb-bicisendas');
             
-            // Controles de Seguridad
             setupLayerControl(layerCamaras, 'cb-camaras');
             setupLayerControl(layerZonasPatrullajes, 'cb-patrullajes');
             setupLayerControl(layerParadasSeguras, 'cb-paradas');
             setupLayerControl(layerLPR, 'cb-lpr');
             setupLayerControl(layerAlarmas, 'cb-alarmas');
             
-            // Controles de Instituciones
             setupLayerControl(layerTeatros, 'cb-teatros');
             setupLayerControl(layerSocFomento, 'cb-soc-fomento');
             setupLayerControl(layerIglesias, 'cb-iglesias');
@@ -976,7 +964,6 @@
             setupLayerControl(layerCentroJubilados, 'cb-centro-jubilados');
             setupLayerControl(layerAsociacionesMutuales, 'cb-asociaciones-mutuales');
             
-            // Controles de Educación
             setupLayerControl(layerEstablecimientosEducativos, 'cb-establecimientos-educativos');
             setupLayerControl(layerEscolaridad, 'cb-escolaridad');
 
@@ -997,17 +984,10 @@
             map.on('zoomend', updateMapZoomClass);
             updateMapZoomClass();
 
-            if (window.INJECTED_GEOJSON && window.INJECTED_GEOJSON.length > 0) {
-                window.INJECTED_GEOJSON.forEach(item => {
-                    const fileName = item.filename ? item.filename.toLowerCase().trim() : '';
-                    if (fileName.endsWith('.geojson') || (item.data && item.data.type === 'FeatureCollection')) {
-                        procesarCapaGeoJson(fileName, item.data);
-                    }
-                });
-            }
+            // LLAMADA A LA FUNCIÓN QUE CARGA LOS ARCHIVOS DESDE GITHUB
+            cargarGeoJSONDesdeGitHub();
         }
 
-        // Inicializamos el mapa apenas cargue el DOM
         document.addEventListener('DOMContentLoaded', () => {
             initMap();
         });
